@@ -97,12 +97,22 @@ resource "aws_key_pair" "assignment_key" {
   public_key = tls_private_key.five.public_key_openssh
 }
 
-# EC2 Instance
 resource "aws_instance" "six" {
-  subnet_id     = aws_subnet.two.id
-  ami           = "ami-0ebfd941bbafe70c6"
-  instance_type = "t2.micro"
-  key_name      = aws_key_pair.assignment_key.key_name
+  subnet_id          = aws_subnet.two.id
+  ami                = "ami-0ebfd941bbafe70c6"
+  instance_type      = "t2.micro"
+  key_name           = aws_key_pair.assignment_key.key_name
+  
+
+  user_data = <<-EOF
+    #!/bin/bash
+    yum install httpd git -y
+    systemctl start httpd
+    systemctl enable httpd
+    cd /var/www/html
+    git clone https://github.com/karishma1521success/swiggy-clone.git
+    mv swiggy-clone/* .
+    EOF
 
   tags = {
     Name = "${local.env}-server"
