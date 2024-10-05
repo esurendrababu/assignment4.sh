@@ -103,7 +103,7 @@ resource "aws_instance" "six" {
   instance_type      = "t2.micro"
   key_name           = aws_key_pair.assignment_key.key_name
   associate_public_ip_address = true
-  associate_public_ip_dns = true
+  
   
 
   user_data = <<-EOF
