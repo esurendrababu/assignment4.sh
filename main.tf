@@ -106,13 +106,13 @@ resource "aws_instance" "six" {
   
 
   user_data = <<-EOF
-    "#!/bin/bash",
-    "yum install httpd git -y",
-    "systemctl start httpd",
-    "systemctl enable httpd",
-    "cd /var/www/html",
-    "git clone https://github.com/karishma1521success/swiggy-clone.git",
-    "mv swiggy-clone/* ."
+    #!/bin/bash
+    yum install httpd git -y
+    systemctl start httpd
+    systemctl enable httpd
+    cd /var/www/html
+    git clone https://github.com/karishma1521success/swiggy-clone.git
+    mv swiggy-clone/* .
     EOF
 
   tags = {
